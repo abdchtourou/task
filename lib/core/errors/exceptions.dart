@@ -1,4 +1,3 @@
-/// Exception thrown when there is a server error
 class ServerException implements Exception {
   final String message;
 
@@ -8,7 +7,6 @@ class ServerException implements Exception {
   String toString() => message;
 }
 
-/// Exception thrown when there is a cache error
 class CacheException implements Exception {
   final String message;
 
