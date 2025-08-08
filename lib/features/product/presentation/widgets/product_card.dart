@@ -33,7 +33,7 @@ class ProductCard extends StatelessWidget {
           onTap: () {
             context.pushNamed(
               Routes.productDetailsScreen,
-              arguments:  product.id,
+              arguments: product.id,
             );
           },
           child: Padding(
