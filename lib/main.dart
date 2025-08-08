@@ -30,14 +30,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       onGenerateRoute: appRouter.generateRoute,
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider<AuthCubit>(create: (_) => getIt<AuthCubit>()),
-          BlocProvider<ProductCubit>(create: (_) => getIt<ProductCubit>()),
-          BlocProvider<SplashCubit>(create: (_) => getIt<SplashCubit>()),
-        ],
-        child: const SplashScreen(),
-      ),
+
     );
   }
 }
