@@ -30,7 +30,6 @@ class _AnimatedHeaderState extends State<AnimatedHeader>
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
 
-    // Start animation
     _animationController.forward();
   }
 

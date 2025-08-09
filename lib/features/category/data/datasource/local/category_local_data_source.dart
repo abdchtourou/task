@@ -22,14 +22,12 @@ class CategoryLocalDataSourceImpl implements CategoryLocalDataSource {
         return CategoryModel(categories: cachedData.categories);
       }
 
-      // If cache is invalid, clear it
       if (cachedData != null && !cachedData.isValid) {
         await box.delete(cacheKey);
       }
 
       return null;
     } catch (e) {
-      // If there's an error with cache, return null to fallback to remote
       return null;
     }
   }
@@ -43,7 +41,6 @@ class CategoryLocalDataSourceImpl implements CategoryLocalDataSource {
       );
       await box.put(cacheKey, cacheModel);
     } catch (e) {
-      // Silently fail caching - app should continue to work without cache
       print('Failed to cache categories: $e');
     }
   }

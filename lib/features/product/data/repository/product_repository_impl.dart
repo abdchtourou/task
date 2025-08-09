@@ -35,7 +35,7 @@ class ProductRepositoryImpl extends ProductRepo {
       }
 
       if (!isConnected) {
-        final fallbackData = await _getFallbackCache();
+        final fallbackData = await getFallbackCache();
         if (fallbackData != null) {
           return Right(fallbackData);
         }
@@ -44,11 +44,11 @@ class ProductRepositoryImpl extends ProductRepo {
         );
       }
 
-      final ProductModel productModel = await _fetchWithTimeout();
+      final ProductModel productModel = await fetchWithTimeout();
       await productLocalDataSource.cacheProducts(productModel);
       return Right(productModel);
     } catch (e) {
-      final fallbackData = await _getFallbackCache();
+      final fallbackData = await getFallbackCache();
       if (fallbackData != null) {
         return Right(fallbackData);
       }
@@ -59,15 +59,12 @@ class ProductRepositoryImpl extends ProductRepo {
   @override
   Future<Either<Failure, ProductItemEntity>> getProductById(int id) async {
     try {
-      // Try local cache first
       final cached = await productLocalDataSource.getCachedProductById(id);
       if (cached != null) {
-        // Optionally refresh in background
         _refreshProductDetailsInBackground(id);
         return Right(cached);
       }
 
-      // Fallback to remote
       final item = await productRemoteDataSource.getProductById(id);
       await productLocalDataSource.cacheProductById(item);
       return Right(item);
@@ -90,7 +87,7 @@ class ProductRepositoryImpl extends ProductRepo {
     } catch (e) {}
   }
 
-  Future<ProductModel> _fetchWithTimeout() async {
+  Future<ProductModel> fetchWithTimeout() async {
     final hasStrongConnection = await NetworkHelper.hasStrongConnection;
     final timeout =
         hasStrongConnection
@@ -99,7 +96,7 @@ class ProductRepositoryImpl extends ProductRepo {
     return await productRemoteDataSource.getProducts().timeout(timeout);
   }
 
-  Future<ProductModel?> _getFallbackCache() async {
+  Future<ProductModel?> getFallbackCache() async {
     try {
       final box = await Hive.openBox<List>('product_cache');
       final data = box.get('products');
