@@ -97,7 +97,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         Row(
-                          spacing: 10,
+                          spacing: 5g,
                           children: [
                             Container(
                               padding: const EdgeInsets.symmetric(
