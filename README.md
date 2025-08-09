@@ -96,3 +96,11 @@ flutter clean && flutter pub get && flutter run
 ## Notes
 - The local login is for demo purposes only; no real backend auth.
 - Product list and details are served by `https://fakestoreapi.com`.
+
+## Screenshots
+
+[![Category Screen](screenshots/categoryScreen.jpg)](screenshots/categoryScreen.jpg)
+
+[![Products Screen](screenshots/productsScreen.jpg)](screenshots/productsScreen.jpg)
+
+[![Product Details Screen](screenshots/productDetailsScreen.jpg)](screenshots/productDetailsScreen.jpg)
